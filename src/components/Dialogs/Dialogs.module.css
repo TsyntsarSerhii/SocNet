@@ -4,3 +4,25 @@
   border-right: 1px solid #000000;
   border-left: 1px solid #000000;
 }
+
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+
+}
+
+/*.dialog {}*/
+
+.dialogsItems {
+  padding: 10px;
+}
+
+.active {
+  color: gold;
+}
+
+.messages {
+  padding: 10px
+}
+
+/*.message {}*/
