@@ -1,3 +1,5 @@
+import { reredderAll } from "../render";
+
 let state = {
 
     profilePage: {
@@ -26,5 +28,15 @@ let state = {
             ],
     },
 }
+
+export let addPost = (postMessage) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+    };
+    state.profilePage.postData.push(newPost);
+    reredderAll(state);
+}
+
 
 export default state;
