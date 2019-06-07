@@ -1,4 +1,5 @@
-import { reredderAll } from "../render";
+let rerenderAll = () => {
+   }
 
 let state = {
 
@@ -7,7 +8,8 @@ let state = {
             [
                 { id: 1, message: 'WTF?!' },
                 { id: 2, message: 'It`s new post!' }
-            ]
+            ],
+        newPostText: 'Add post'
     },
 
     dialogPage: {
@@ -29,14 +31,23 @@ let state = {
     },
 }
 
-export let addPost = (postMessage) => {
+export const addPost = () => {
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
     };
     state.profilePage.postData.push(newPost);
-    reredderAll(state);
+    state.profilePage.newPostText = '';
+    rerenderAll(state);
 }
 
+export const updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderAll(state);
+}
+
+export const subscriber = (observer) => {
+    rerenderAll = observer;  //pattern
+}
 
 export default state;
