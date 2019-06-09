@@ -1,22 +1,19 @@
 import './index.css';
-import state from './state/state';
+import store from './state/state';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { addPost, updateNewPostText, subscriber } from './state/state';
 
 
-let rerenderAll = () => {
-    ReactDOM.render(<App
-        state={state}
-        addPost={addPost}
-        updateNewPostText={updateNewPostText} />,
-        document.getElementById('root'));
+let rerenderAll = (state) => {
+        ReactDOM.render(<App
+                state={state}
+                dispatch={store.dispatch.bind(store)} />,
+                document.getElementById('root'));
 }
 
-rerenderAll(state);
-subscriber(rerenderAll);
+rerenderAll(store.getState());
+store.subscriber(rerenderAll);
 
 
- 
