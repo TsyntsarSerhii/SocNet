@@ -1,8 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-
-import { updateNewPostTextActionCreatoe, addPostActionCreator } from '../../../state/state'
+import { updateNewPostTextActionCreator, addPostActionCreator } from '../../../state/state'
 
 
 const MyPosts = (props) => {
@@ -16,7 +15,7 @@ const MyPosts = (props) => {
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    let action = updateNewPostTextActionCreatoe(text);
+    let action = updateNewPostTextActionCreator(text);
     props.dispatch(action);
   }
 
@@ -24,7 +23,10 @@ const MyPosts = (props) => {
     <div>
       My posts
       <div>
-        <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
+        <textarea onChange={onPostChange}
+          ref={newPostElement}
+          value={props.newPostText}
+          placeholder='Enter U post' />
         <button onClick={addPost}>Add post</button>
       </div>
       <div className={s.posts}>
