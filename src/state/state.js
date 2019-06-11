@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
 
 let store = {
     _state: {
@@ -43,38 +41,10 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-            };
-            this._state.profilePage.postData.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this.rerenderAll(this._state);
-        }
-        else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this.rerenderAll(this._state);
-        }
-        else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogPage.newMessageText = action.messageText;
-            this.rerenderAll(this._state);
-        }
-        else if (action.type === SEND_MESSAGE) {
-            let messageText = this._state.dialogPage.newMessageText;
-            this._state.dialogPage.newMessageText = '';
-            this._state.dialogPage.messagesData.push({ id: 5, message: messageText });
-            this.rerenderAll(this._state);
-        }
-    },
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
+        this.rerenderAll(this._state);
+    }
 }
-
-export const addPostActionCreator = () => ({ type: ADD_POST })
-export const updateNewPostTextActionCreator = (text) =>
-    ({ type: UPDATE_NEW_POST_TEXT, newText: text })
-
-export const sendMessageCreator = () => ({ type: SEND_MESSAGE })
-export const updateNewMessageTextCreator = (messageText) =>
-    ({ type: UPDATE_NEW_MESSAGE_TEXT, messageText: messageText })
 
 export default store;
