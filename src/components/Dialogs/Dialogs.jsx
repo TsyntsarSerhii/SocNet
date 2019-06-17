@@ -2,11 +2,11 @@ import React from 'react'
 import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
-import { updateNewMessageTextCreator, sendMessageCreator } from '../../state/dialogs-reducer';
+
 
 const Dialogs = (props) => {
 
-    let state = props.store.getState().dialogPage;
+    let state = props.dialogPage;
 
     let dialogsElements = state.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />);
     let messagesElements = state.messagesData.map(message => <Message message={message.message} />);
@@ -14,12 +14,12 @@ const Dialogs = (props) => {
 
 
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator());
+        props.sendMessage();
     }
 
     let onNewMessageChange = (e) => {
         let messageText = e.target.value;
-        props.store.dispatch(updateNewMessageTextCreator(messageText));
+        props.updateNewMessageText(messageText)
     }
 
     return (
@@ -33,7 +33,7 @@ const Dialogs = (props) => {
                     <div>
                         <button onClick={onSendMessageClick}>Send message</button>
                     </div>
-                    <div> 
+                    <div>
                         <textarea value={newMessageText}
                             onChange={onNewMessageChange}
                             placeholder='Enter U message' />
