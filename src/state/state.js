@@ -1,17 +1,10 @@
+/*
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
-<<<<<<< HEAD
-=======
-
-const ADD_POST = 'ADD-POST';
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
->>>>>>> 3e8eb07466c16f8c0e3060a093d5e4d7b8718cb5
 
 
 let store = {
-   /* _state: {
+    _state: {
 
         profilePage: {
             postData:
@@ -40,7 +33,7 @@ let store = {
                 ],
             newMessageText: ''
         },
-    }, */
+    }, 
 
     getState() {
         return this._state;
@@ -57,3 +50,4 @@ let store = {
 }
 
 export default store;
+*/
