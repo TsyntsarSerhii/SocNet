@@ -4,11 +4,11 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 let initialState = {
     postData:
-                [
-                    { id: 1, message: 'WTF?!' },
-                    { id: 2, message: 'It`s new post!' }
-                ],
-            newPostText: ''
+        [
+            { id: 1, message: 'WTF?!' },
+            { id: 2, message: 'It`s new post!' }
+        ],
+    newPostText: ''
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -19,12 +19,16 @@ const profileReducer = (state = initialState, action) => {
                 id: 5,
                 message: state.newPostText,
             };
-            state.postData.push(newPost);
-            state.newPostText = '';
-            return state;
+            return {
+                ...state,
+                postData: [...state.postData, newPost],
+                newPostText: ''
+            };
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            return {
+                ...state,
+                newPostText: action.newText
+            };
         default:
             return state;
     }
@@ -33,5 +37,5 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = () => ({ type: ADD_POST })
 export const updateNewPostTextActionCreator = (text) =>
     ({ type: UPDATE_NEW_POST_TEXT, newText: text })
-    
+
 export default profileReducer;
