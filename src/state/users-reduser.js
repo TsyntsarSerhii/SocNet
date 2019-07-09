@@ -3,12 +3,14 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const IS_FEATCHING = 'IS_FEATCHING';
 
 let initialState = {
     users: [],
     pageSize: 6,
     totalUsersCount: 0,
     currentPage: 1,
+    isFeatching: true,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -43,15 +45,19 @@ const usersReducer = (state = initialState, action) => {
         case SET_TOTAL_USERS_COUNT: {
             return { ...state, totalUsersCount: action.totalUsersCount }
         }
+        case IS_FEATCHING: {
+            return { ...state, isFeatching: action.isFeatching }
+        }
         default:
             return state;
     }
 }
 
-export const FollowActionCreator = (userID) => ({ type: FOLLOW, userID })
-export const UnfollowActionCreator = (userID) => ({ type: UNFOLLOW, userID })
-export const SetUsersActionCreator = (users) => ({ type: SET_USERS, users })
-export const SetCurrentPageActionCreator = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
-export const SetTotalUsersCountActionCreator = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
+export const follow = (userID) => ({ type: FOLLOW, userID })
+export const unfollow = (userID) => ({ type: UNFOLLOW, userID })
+export const setUsers = (users) => ({ type: SET_USERS, users })
+export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
+export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
+export const setIsFeatching = (isFeatching) => ({ type: IS_FEATCHING, isFeatching })
 
 export default usersReducer;
