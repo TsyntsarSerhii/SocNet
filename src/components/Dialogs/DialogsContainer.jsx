@@ -7,7 +7,6 @@ let mapStateToProps = (state) => {
         dialogPage: state.dialogPage
     }
 }
-
 let mapDispatchToProps = (dispatch) => {
     return {
         updateNewMessageText: (messageText) => {
@@ -18,7 +17,6 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 }
-
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 export default DialogsContainer;

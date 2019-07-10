@@ -5,7 +5,9 @@
 
 .selectedPage {
     font-weight: bold;
-    cursor: pointer 
-    }
+    cursor: pointer
+}
 
-
+.active {
+    color: gold;
+}

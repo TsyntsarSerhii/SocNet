@@ -54,30 +54,6 @@ let mapStateToProps = (state) => {
         isFeatching: state.usersPage.isFeatching,
     }
 }
-/*
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userID) => {
-            dispatch(FollowActionCreator(userID));
-        },
-        unfollow: (userID) => {
-            dispatch(UnfollowActionCreator(userID));
-        },
-        setUsers: (users) => {
-            dispatch(SetUsersActionCreator(users));
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(SetCurrentPageActionCreator(pageNumber));
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(SetTotalUsersCountActionCreator(totalCount));
-        },
-        setIsFeatching: (isFeatching) => {
-            dispatch(SetIsFeatchingActionCreator(isFeatching));
-        },
-    }
-}
-*/
 export default connect(mapStateToProps, {
     follow,
     unfollow,
