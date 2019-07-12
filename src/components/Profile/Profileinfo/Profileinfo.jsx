@@ -2,13 +2,13 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader'
 
-let NONE = 'none';
+let NONE = 'NONE';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
     return (<Preloader />)
   }
-   return (
+  return (
     <div className={s.Profile}>
       <div>
         <img src={props.profile.photos.small} alt="AVATAR" />
