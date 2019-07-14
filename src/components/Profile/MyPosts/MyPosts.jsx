@@ -7,16 +7,13 @@ const MyPosts = (props) => {
 
   let postsElement = props.postData.map(posts => <Post message={posts.message} />);
   let newPostElement = React.createRef();
-
   let onAddPost = () => {
     props.addPost();
   }
-
   let onPostChange = () => {
     let text = newPostElement.current.value;
     props.updatePost(text);
   }
-
   return (
     <div>
       My posts
