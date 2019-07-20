@@ -5,7 +5,8 @@ import {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    setIsFeatching
+    setIsFeatching,
+    setFollowingInProgress,
 } from '../../state/users-reduser';
 import Users from './Users'
 import React from 'react';
@@ -40,6 +41,8 @@ class UsersContainer extends React.Component {
                 users={this.props.users}
                 unfollow={this.props.unfollow}
                 follow={this.props.follow}
+                setFollowingInProgress={this.props.setFollowingInProgress}
+                followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -51,6 +54,7 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFeatching: state.usersPage.isFeatching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 export default connect(mapStateToProps, {
@@ -59,5 +63,6 @@ export default connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    setIsFeatching
+    setIsFeatching,
+    setFollowingInProgress
 })(UsersContainer);
