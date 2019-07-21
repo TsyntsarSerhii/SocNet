@@ -2,34 +2,21 @@ import { connect } from 'react-redux';
 import {
     follow,
     unfollow,
-    setUsers,
+    getUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setIsFeatching,
     setFollowingInProgress,
 } from '../../state/users-reduser';
 import Users from './Users'
 import React from 'react';
 import Preloader from '../common/Preloader/Preloader.js';
-import { usersAPI } from '../../api/api';
 
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.setIsFeatching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setIsFeatching(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
     onPageChange = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.setIsFeatching(true);
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.setIsFeatching(false);
-            this.props.setUsers(data.items);
-        });
+        this.props.getUsers(pageNumber, this.props.pageSize);
     }
     render() {
         return <>
@@ -41,7 +28,6 @@ class UsersContainer extends React.Component {
                 users={this.props.users}
                 unfollow={this.props.unfollow}
                 follow={this.props.follow}
-                setFollowingInProgress={this.props.setFollowingInProgress}
                 followingInProgress={this.props.followingInProgress}
             />
         </>
@@ -60,9 +46,7 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     follow,
     unfollow,
-    setUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setIsFeatching,
-    setFollowingInProgress
+    setFollowingInProgress,
+    getUsers
 })(UsersContainer);

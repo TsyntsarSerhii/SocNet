@@ -1,3 +1,5 @@
+import { usersAPI } from '../api/api';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -63,12 +65,48 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const follow = (userID) => ({ type: FOLLOW, userID })
-export const unfollow = (userID) => ({ type: UNFOLLOW, userID })
+export const followSuccess = (userID) => ({ type: FOLLOW, userID })
+export const unfollowSuccess = (userID) => ({ type: UNFOLLOW, userID })
 export const setUsers = (users) => ({ type: SET_USERS, users })
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount })
 export const setIsFeatching = (isFeatching) => ({ type: IS_FEATCHING, isFeatching })
 export const setFollowingInProgress = (isFeatching, userID) => ({ type: FOLLOWING_IN_PROGRESS, isFeatching, userID })
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setIsFeatching(true));
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setIsFeatching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+        });
+    }
+}
+
+export const follow = (userID) => {
+    return (dispatch) => {
+        dispatch(setFollowingInProgress(true, userID));
+        usersAPI.follow(userID).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(followSuccess(userID))
+            }
+            dispatch(setFollowingInProgress(false, userID));
+        });
+    };
+}
+
+export const unfollow = (userID) => {
+    return (dispatch) => {
+        dispatch(setFollowingInProgress(true, userID));
+        usersAPI.unfollow(userID).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unfollowSuccess(userID))
+            }
+            dispatch(setFollowingInProgress(false, userID));
+        });
+    };
+}
+
 
 export default usersReducer;
