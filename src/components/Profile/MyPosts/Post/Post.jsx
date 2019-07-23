@@ -5,11 +5,11 @@ const Post = (props) => {
   return (
     <div className={s.item}>
       {props.message}
-          <div>
+      <div>
         <span>like</span>
       </div>
     </div>
   )
- }
+}
 
 export default Post;
