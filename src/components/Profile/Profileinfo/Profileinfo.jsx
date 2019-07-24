@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader'
+import ProfileStatus from './ProfileStatus'
+
 
 let NONE = 'NONE';
 
@@ -12,6 +14,7 @@ const ProfileInfo = (props) => {
     <div className={s.Profile}>
       <div>
         <img src={props.profile.photos.small} alt="AVATAR" />
+        <ProfileStatus status={"STATUS"} />
         <p>Contacts:</p>
         <ul>
           <li>facebook:  {props.profile.contacts.facebook != null ? props.profile.contacts.facebook : NONE}</li>
