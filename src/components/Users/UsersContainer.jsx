@@ -5,7 +5,7 @@ import {
     getUsers,
     setCurrentPage,
     setFollowingInProgress,
-} from '../../state/users-reduser';
+} from '../../state/users-reducer';
 import Users from './Users'
 import React from 'react';
 import Preloader from '../common/Preloader/Preloader.js';
