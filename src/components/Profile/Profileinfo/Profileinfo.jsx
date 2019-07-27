@@ -14,7 +14,7 @@ const ProfileInfo = (props) => {
     <div className={s.Profile}>
       <div>
         <img src={props.profile.photos.small} alt="AVATAR" />
-        <ProfileStatus status={"STATUS"} />
+        <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
         <p>Contacts:</p>
         <ul>
           <li>facebook:  {props.profile.contacts.facebook != null ? props.profile.contacts.facebook : NONE}</li>
