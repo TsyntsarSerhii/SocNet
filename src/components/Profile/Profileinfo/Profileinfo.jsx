@@ -11,9 +11,10 @@ const ProfileInfo = (props) => {
     return (<Preloader />)
   }
   return (
-    <div className={s.Profile}>
+    <div className={s.content}>
       <div>
-        <img src={props.profile.photos.small} alt="AVATAR" />
+        <img src={props.profile.photos.small} alt="AVATAR" className={s.userPhoto}/>
+        {props.name}
         <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
         <p>Contacts:</p>
         <ul>

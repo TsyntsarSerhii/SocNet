@@ -10,7 +10,7 @@ import Users from './Users'
 import React from 'react';
 import Preloader from '../common/Preloader/Preloader.js';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { compose } from '../../../../../AppData/Local/Microsoft/TypeScript/3.5/node_modules/redux';
+import { compose } from 'redux';
 
 
 class UsersContainer extends React.Component {

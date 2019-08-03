@@ -1,6 +1,13 @@
 .content {
-  border-top: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  border-right: 1px solid #000000;
-  border-left: 1px solid #000000;
+  border-top: 1px ;
+  border-bottom: 1px ;
+  border-right: 1px ;
+  border-left: 1px ;
+}
+
+.userPhoto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 0.1rem solid teal;
 }
