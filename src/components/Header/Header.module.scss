@@ -1,22 +1,18 @@
 @import '../../index.scss';
 
+
 .header {
     grid-area: h;
     background: $mainBlack;
-    /*border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
-    border-right: 1px solid #000000;
-    border-left: 1px solid #000000;*/
+    padding: 20px 10px;
+    text-decoration: none;
+    line-height: 20px;
 }
-
-
 
 .loginBlock {
     float: right;
     color: $mainGrey;
 }
-
 .loginBlock a {
     color: $mainGrey;
-    margin-inline-start: -100%
 }

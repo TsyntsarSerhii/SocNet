@@ -15,7 +15,7 @@ let Users = (props) => {
             {pages.map(p => {
                 return <span className={props.currentPage === p && s.selectedPage}
                     onClick={(e) => { props.onPageChange(p) }}>{p}</span>
-            })};
+            })}
             </div>
         <div className={s.user_grid}>
             {
@@ -33,12 +33,13 @@ let Users = (props) => {
                             {u.followed
                                 ? <button disabled={props.followingInProgress
                                     .some(id => id === u.id)}
-                                    onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
+                                    onClick={() => { props.unfollow(u.id) }} className={s.unfollow}>Unfollow</button>
                                 : <button disabled={props.followingInProgress
                                     .some(id => id === u.id)}
-                                    onClick={() => { props.follow(u.id) }}>Follow</button>}
+                                    onClick={() => { props.follow(u.id) }} className={s.follow}>Follow</button>}
                         </div>
                     </span>
+
                     <span>
                         <span>
                             <div className={s.name}>{u.name}</div>
