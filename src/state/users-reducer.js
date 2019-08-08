@@ -73,9 +73,11 @@ export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_
 export const setIsFeatching = (isFeatching) => ({ type: IS_FEATCHING, isFeatching })
 export const setFollowingInProgress = (isFeatching, userID) => ({ type: FOLLOWING_IN_PROGRESS, isFeatching, userID })
 
-export const getUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(setIsFeatching(true));
+        dispatch(setCurrentPage(currentPage));
+        
         usersAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(setIsFeatching(false));
             dispatch(setUsers(data.items));
