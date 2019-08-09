@@ -16,3 +16,24 @@
 .loginBlock a {
     color: $mainGrey;
 }
+
+.logoutBTN {
+    background-color: $mainWhite;
+    border: 1px solid $mainBlack;
+    color: $mainBlack;
+    padding: 2px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+    font-weight: 600;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: $mainBlue;
+      color: $mainWhite;
+      opacity: 1;
+    }
+  }
