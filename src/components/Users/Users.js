@@ -1,7 +1,9 @@
 import React from 'react';
-import s from './Users.module.scss';
-import userPHOTO from '../../assets/imeges/USER.png';
 import { NavLink } from 'react-router-dom';
+
+import userPHOTO from '../../assets/imeges/USER.png';
+
+import s from './Users.module.scss';
 
 
 let Users = (props) => {
@@ -16,7 +18,7 @@ let Users = (props) => {
                 return <span className={props.currentPage === p && s.selectedPage}
                     onClick={(e) => { props.onPageChange(p) }}>{p}</span>
             })}
-            </div>
+        </div>
         <div className={s.user_grid}>
             {
                 props.users.map(u => <div key={u.id} className={s.user}>
@@ -50,8 +52,7 @@ let Users = (props) => {
                             <div>{"u.location.city"}</div>
                         </span>
                     </span>
-                </div>)
-            }
+                </div>)}
         </div>
     </div>
 }

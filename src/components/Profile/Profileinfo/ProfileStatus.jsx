@@ -1,54 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
-class ProfileStatus extends React.Component {
-    state = {
-        editMode: false,
-        status: this.props.status
-    }
-    activateEditMode = () => {
-        this.setState({
-            editMode: true
-        });
-    }
-    deActivateEditMode = () => {
-        this.setState({
-            editMode: false
-        });
-        this.props.updateUserStatus(this.state.status);
-    }
-    onStatusChange = (e) => {
-        this.setState({
-            status: e.currentTarget.value
-        });
+const ProfileStatus = (props) => {
+
+    const [editMode, setEditMode] = useState(false);
+    const [status, setStatus] = useState(props.status);
+
+    const activateEditMode = () => {
+        setEditMode(true)
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.status !== this.props.status) {
-            this.setState({
-                status: this.props.status
-            });
-        }
+    const deActivateEditMode = () => {
+        setEditMode(false)
+        props.updateUserStatus(status);
     }
 
-    render() {
-        return (
-            <div>
-                {!this.state.editMode &&
-                    <div>
-                        <span onDoubleClick={this.activateEditMode}>{this.props.status || "What's on your mind?"}</span>
-                    </div>
-                }
-                {this.state.editMode &&
-                    <div>
-                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deActivateEditMode}
-                            value={this.state.status} />
-                    </div>
-                }
-            </div>
-        )
+    const onStatusChange = (e) => {
+        setStatus(e.currentTarget.value);
     }
+
+    return (
+        <div>
+            {!editMode &&
+                <div>
+                    <span
+                        onDoubleClick={activateEditMode}>
+                        {props.status || "What's on your mind?"}
+                    </span>
+                </div>
+            }
+            {editMode &&
+                <div>
+                    <input
+                        autoFocus={true}
+                        onBlur={deActivateEditMode}
+                        onChange={onStatusChange}
+                        value={status}
+                    />
+                </div>
+            }
+        </div>
+    )
 }
-
 
 export default ProfileStatus;
