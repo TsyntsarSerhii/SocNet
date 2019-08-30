@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Route } from "react-router-dom";
-import './App.css';
+
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
@@ -14,6 +14,7 @@ import Login from './components/Login/Login';
 import { initializeApp } from './state/app-reducer'
 import Preloader from './components/common/Preloader/Preloader';
 
+import './App.css';
 
 class App extends React.Component {
   componentDidMount() {
