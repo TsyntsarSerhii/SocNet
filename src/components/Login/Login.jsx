@@ -1,15 +1,17 @@
 import React from 'react';
-import s from '../common/FormsControls/FormsControls.module.css'
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
+
 import { Input } from '../common/FormsControls/FormsControls';
 import { required } from '../../utils/validators/validators';
-import { connect } from 'react-redux';
 import { login } from '../../state/auth-reducer';
 
+import s from '../common/FormsControls/FormsControls.module.css'
 
-const LoginForm = (props) => {
+
+const LoginForm = (handleSubmit, error) => {
     return (<div>
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field
                     name={"email"}
@@ -32,9 +34,9 @@ const LoginForm = (props) => {
                     component={Input} /> remember me
             </div>
             {
-                props.error &&
+                error &&
                 <div className={s.formSummaryError}>
-                    {props.error}
+                    {error}
                 </div>
             }
             <div>
