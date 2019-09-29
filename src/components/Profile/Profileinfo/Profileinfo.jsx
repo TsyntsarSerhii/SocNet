@@ -2,6 +2,7 @@ import React from 'react';
 
 import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatus from './ProfileStatus';
+import userPhoto from '../../../assets/imeges/USER.png';
 
 import s from './ProfileInfo.module.scss';
 
@@ -12,11 +13,20 @@ const ProfileInfo = (props) => {
   if (!props.profile) {
     return (<Preloader />)
   }
+
+  const mainPhotoSelect = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0])
+    }
+  }
+
   return (
     <div className={s.content}>
       <div>
-        <img src={props.profile.photos.small} alt="AVATAR" className={s.userPhoto}/>
-        {props.name}
+        <img src={props.profile.photos.small || userPhoto} alt="AVATAR" className={s.userPhoto} />
+        <div>
+          {props.isOwner && <input type={'file'} onChange={mainPhotoSelect} />}
+        </div>
         <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
         <p>Contacts:</p>
         <ul>
