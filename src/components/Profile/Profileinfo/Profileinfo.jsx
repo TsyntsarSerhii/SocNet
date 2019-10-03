@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatus from './ProfileStatus';
 import userPhoto from '../../../assets/imeges/USER.png';
+import ProfileDataForm from './ProfileDataForm';
 
 import s from './ProfileInfo.module.scss';
 
 
-let NONE = 'NONE';
+const ProfileInfo = ({ profile, saveProfile, ...props }) => {
 
-const ProfileInfo = (props) => {
-  if (!props.profile) {
+  const [editMode, setEditMode] = useState(false)
+
+  if (!profile) {
     return (<Preloader />)
+  }
+
+  const onSubmit = (formData) => {
+    saveProfile(formData).then(
+      () => {
+        setEditMode(false);
+      }
+    );
   }
 
   const mainPhotoSelect = (e) => {
@@ -19,27 +29,57 @@ const ProfileInfo = (props) => {
       props.savePhoto(e.target.files[0])
     }
   }
-
   return (
     <div className={s.content}>
+      <img src={profile.photos.small || userPhoto} alt="AVATAR" className={s.userPhoto} />
       <div>
-        <img src={props.profile.photos.small || userPhoto} alt="AVATAR" className={s.userPhoto} />
-        <div>
-          {props.isOwner && <input type={'file'} onChange={mainPhotoSelect} />}
-        </div>
-        <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
-        <p>Contacts:</p>
-        <ul>
-          <li>facebook:  {props.profile.contacts.facebook != null ? props.profile.contacts.facebook : NONE}</li>
-          <li>website:  {props.profile.contacts.website != null ? props.profile.contacts.website : NONE}</li>
-          <li>vk:  {props.profile.contacts.vk != null ? props.profile.contacts.vk : NONE}</li>
-          <li>twitter:  {props.profile.contacts.twitter != null ? props.profile.contacts.twitter : NONE}</li>
-          <li>instagram:  {props.profile.contacts.instagram != null ? props.profile.contacts.instagram : NONE}</li>
-          <li>yuotube:  {props.profile.contacts.youtube != null ? props.profile.contacts.youtube : NONE}</li>
-          <li>github:  {props.profile.contacts.github != null ? props.profile.contacts.github : NONE}</li>
-          <li>mainLink: {props.profile.contacts.mainLink != null ? props.profile.contacts.mainLink : NONE}</li>
-        </ul>
+        {props.isOwner && <input type={'file'} onChange={mainPhotoSelect} />}
       </div>
+      {editMode
+        ? <ProfileDataForm profile={profile} onSubmit={onSubmit} initialValues={profile}/>
+        : <ProfileData goToEditMode={() => { setEditMode(true) }} profile={profile} isOwner={props.isOwner} />
+      }
+      <b><ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} /> </b>
+    </div>
+  )
+}
+
+const ProfileData = ({ profile, isOwner, goToEditMode }) => {
+  return (
+    <div>
+      <div>
+        <b>{profile.fullName}</b>
+      </div>
+      {isOwner && <div><button onClick={goToEditMode}>Edit</button></div>}
+      <div>
+        <b> Looking for work:</b> {profile.lookingForAJob ? 'yes' : 'no'}
+      </div>
+      {profile.lookingForAJob &&
+        <div>
+          <b> My proffesional skills:</b> {profile.lookingForAJobDescription}
+        </div>
+      }
+      <div>
+        <b>About me</b>: {profile.aboutMe}
+      </div>
+      <div>
+        <b>Contacts:</b>
+        {
+          Object.keys(profile.contacts).map(key => {
+            return (
+              <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+            )
+          })
+        }
+      </div>
+    </div>
+  )
+}
+
+const Contact = ({ contactTitle, contactValue }) => {
+  return (
+    <div className={s.contact}>
+      {contactTitle} : {contactValue}
     </div>
   )
 }
